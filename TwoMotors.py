@@ -1,4 +1,5 @@
-from machine import Pin
+import machine
+import Pin
 import time
 
 # Motor 1 configuration
