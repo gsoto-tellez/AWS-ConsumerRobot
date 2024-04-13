@@ -1,0 +1,52 @@
+import time
+
+class Arm:
+    def __init__(self):
+        self.
+    def
+
+    robot_arm=Arm()
+    robot_arm.move_arm_vertical(dist)
+
+
+
+def reached_ls_left():
+    pass
+
+def reached_limit_switch_right():
+    pass
+
+def rotate_until_limit_switch_left():
+    while not reached_ls_
+
+
+def move_arm_vertical(dist):  #Body
+    pass
+
+def move_arm_joints(shoulder,elbow,wrist):  #Arm
+    pass
+
+def rotate_waist(angle):  #Body
+    pass
+
+def grasp_hand(is_open):  #Arm
+    pass
+
+def move_head(angleC): #Head
+
+move_arm_joints(0,135,0)
+
+move_arm_joints(0,0,0)
+
+move_arm_joints(0,135,0)
+
+move_arm_joints(0,135,0)
+
+move_arm_joints(0,135,0)
+
+move_arm_joints(0,135,0)
+
+move_arm_joints(0,135,0)
+
+move_arm_joints(0,135,0)
+

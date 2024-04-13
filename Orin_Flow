@@ -1,0 +1,116 @@
+# Hardware classes
+
+# NOTE: Must implement in ESP-32
+class StepperMotor:
+    def __init__(self):
+        # Configure pins and operating parameters
+        pass
+
+    # Expected Input: delta_angle > 0
+    def rotate_cw(self, delta_angle):
+        # Set angle in stepper to rotate clockwise
+        pass
+
+    # Expected Input: delta_angle > 0
+    def rotate_ccw(self, delta_angle):
+        # Set angle in stepper to rotate counter-clockwise
+        pass
+
+# NOTE: Must implement in ESP-32
+class MotorEncoder:
+    def __init__(self):
+        # Configure pins and operating parameters
+        self.angle = 0
+        pass
+
+    # Expected Output: 0 <= angle <= 359
+    def read_angle():
+        # Read from sensor and save to itself
+        self.angle = ...
+        return self.angle
+
+# NOTE: Must implement in OpenRB
+class Servo:
+    def __init__(self):
+        # Configure pins and operating parameters
+        pass
+
+    # Expected Input: 0 <= angle <= 359
+    def rotate_to_angle(self, angle):
+        # Set angle in servo
+        pass
+
+# NOTE: Must implement in ESP-32
+class LimitSwitch:
+    def __init__(self):
+        self.is_pressed = False
+
+    # Expected Output: True / False
+    def read_switch(self):
+        self.is_pressed = ...
+        return self.is_pressed
+
+
+# NOTE: Must implement in ESP-32
+class RobotJoint:
+    def __init__(self, lower_limit, upper_limit):
+        self.lower_limit = lower_limit
+        self.upper_limit = upper_limit
+
+        self.stepper_motor = StepperMotor()
+        self.motor_encoder = MotorEncoder()
+
+
+    def calibrate(self):
+        pass
+
+
+    # Expected Input: lower_limit <= target_angle <= upper_limit
+    def rotate_to_angle(self, target_angle, is_ccw):
+        if target_angle > self.upper_limit:
+            target_angle = self.upper_limit
+        elif target_angle < self.lower_limit:
+            target_angle = self.lower_limit
+        else:
+            pass
+
+        current_angle = self.motor_encoder.read_angle()
+
+        # 330 -> 30
+
+        if current_angle < target_angle:
+            delta = target_angle - current_angle
+            self.stepper_motor.rotate_ccw(delta)
+        else:
+            delta = target_angle - current_angle
+            self.stepper_motor.rotate_cw(delta)
+
+#
+
+class Body:
+    def __init__(self):
+        self.waist = RobotJoint()
+        self.chest = RobotJoint() # NOTE: This is linear movement only
+
+class Arm:
+    def __init__(self):
+        self.shoulder = RobotJoint()
+        self.elbow    = RobotJoint()
+        self.wrist    = Servo()
+        self.hand     = Servo()
+
+class Head:
+    def __init__(self):
+        self.eyes = Servo()
+
+
+class Robot:
+    def __init__(self):
+        self.body = Body()
+        self.arm = Arm()
+        self.head = Head()
+
+if __name__ == '__main__':
+    my_robot = Robot()
+    my_robot.arm.move_arm_joints()
+    
